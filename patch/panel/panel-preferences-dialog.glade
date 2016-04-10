@@ -620,7 +620,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkHBox" id="bg-alpha-box">
+                                  <object class="GtkVBox" id="bg-alpha-box">
                                     <property name="visible">True</property>
                                     <property name="spacing">12</property>
                                     <property name="orientation">vertical</property>

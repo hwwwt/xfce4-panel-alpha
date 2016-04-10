@@ -277,7 +277,7 @@ static const char panel_preferences_dialog_ui[] =
   "d></object><packing><property name=\"expand\">False</property><property"
   " name=\"position\">1</property></packing></child></object><packing><pro"
   "perty name=\"position\">0</property></packing></child><child><object cl"
-  "ass=\"GtkHBox\" id=\"bg-alpha-box\"><property name=\"visible\">True</pr"
+  "ass=\"GtkVBox\" id=\"bg-alpha-box\"><property name=\"visible\">True</pr"
   "operty><property name=\"spacing\">12</property><property name=\"orienta"
   "tion\">vertical</property><child><object class=\"GtkHBox\" id=\"scale-b"
   "ox\"><property name=\"visible\">True</property><child><object class=\"G"
