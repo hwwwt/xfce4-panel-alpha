@@ -510,5 +510,7 @@ static const char panel_preferences_dialog_ui[] =
   "></action-widgets></object></interface>"
 };
 
-static const unsigned panel_preferences_dialog_ui_length = 33004u;
+/* modified by youtian 2016.04.11 */
+/* static const unsigned panel_preferences_dialog_ui_length = 33004u; */
+static const unsigned panel_preferences_dialog_ui_length = 33751u;
 
