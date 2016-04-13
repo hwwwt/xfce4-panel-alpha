@@ -160,6 +160,9 @@ static void         panel_window_plugin_set_nrows               (GtkWidget      
 static void         panel_window_plugin_set_screen_position     (GtkWidget        *widget,
                                                                  gpointer          user_data);
 
+/* add by youtian 2016.04.13 */
+static void         panel_window_update_background_alpha         (WnckWindow  *active_window,
+                                                                 PanelWindow *window);
 
 
 enum
@@ -2281,16 +2284,13 @@ panel_window_active_window_state_changed (WnckWindow  *active_window,
 
   if (changed & WNCK_WINDOW_STATE_SHADED)
     panel_window_active_window_geometry_changed (active_window, window);
-  /* added by youtian 2016.04.09 */
-  else if (PANEL_BASE_WINDOW (window)->is_composited && window->auto_alpha)
-    {
-      PanelBaseWindow *base_window = PANEL_BASE_WINDOW (window);
-      base_window->background_alpha = 
-          wnck_window_is_maximized (active_window) ? 1.00 : base_window->unmaximized_alpha;
-      gtk_widget_queue_draw (GTK_WIDGET (base_window));
-      panel_base_window_set_plugin_data (base_window,
-          panel_base_window_set_plugin_background_alpha);
-    }
+
+  /* added by youtian 2016.04.13 */
+  /* update the alpha if the active window is maximized or unmaximized */
+  if (window->auto_alpha && PANEL_BASE_WINDOW (window)->is_composited
+      && (changed & WNCK_WINDOW_STATE_MAXIMIZED_HORIZONTALLY))
+    panel_window_update_background_alpha (active_window, window);
+
 }
 
 
@@ -2591,17 +2591,39 @@ panel_window_update_autohide_window (PanelWindow *window,
            * window already overlaps the panel */
           panel_window_active_window_geometry_changed (active_window, window);
 
-          /* added by youtian 2016.04.09 */
-          if (PANEL_BASE_WINDOW (window)->is_composited && window->auto_alpha)
-            {
-              PanelBaseWindow *base_window = PANEL_BASE_WINDOW (window);
-              base_window->background_alpha = 
-                  wnck_window_is_maximized (active_window) ? 1.00 : base_window->unmaximized_alpha;
-              gtk_widget_queue_draw (GTK_WIDGET (base_window));
-              panel_base_window_set_plugin_data (base_window,
-                  panel_base_window_set_plugin_background_alpha);
-            }
+	  /* added by youtian 2016.04.13 */
+	  /* update the alpha when active window changed */
+	  if (window->auto_alpha && PANEL_BASE_WINDOW (window)->is_composited)
+	    panel_window_update_background_alpha (active_window, window);
         }
+    }
+}
+
+
+
+/* added by youtian 2016.04.13 */
+static void
+panel_window_update_background_alpha (WnckWindow  *active_window, PanelWindow *window)
+{
+  panel_return_if_fail (PANEL_IS_WINDOW (window));
+
+  PanelBaseWindow *base_window = PANEL_BASE_WINDOW (window);
+  if (wnck_window_is_maximized (active_window))
+    {
+      if (base_window->background_alpha != 1.00)
+        {
+          base_window->background_alpha = 1.00;
+          gtk_widget_queue_draw (GTK_WIDGET (base_window));
+          panel_base_window_set_plugin_data (base_window,
+              panel_base_window_set_plugin_background_alpha);
+        }
+    }
+  else if (base_window->background_alpha != base_window->unmaximized_alpha)
+    {
+      base_window->background_alpha = base_window->unmaximized_alpha;
+      gtk_widget_queue_draw (GTK_WIDGET (base_window));
+      panel_base_window_set_plugin_data (base_window,
+          panel_base_window_set_plugin_background_alpha);
     }
 }
 
