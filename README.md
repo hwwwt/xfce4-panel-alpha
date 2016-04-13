@@ -17,7 +17,6 @@ $makepkg -si
 
 其他发行版用户：
 
-依赖：exo garcon libxfce4ui libwnck hicolor-icon-theme desktop-file-utils
 编译依赖：intltool gtk-doc wget
 
 $git clone https://github.com/hwwwt/xfce4-panel-alpha.git
