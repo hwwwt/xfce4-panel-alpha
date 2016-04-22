@@ -4,9 +4,9 @@ _pkgname=xfce4-panel
 pkgname=${_pkgname}-alpha
 pkgver=4.12.0
 pkgrel=1
-pkgdesc="Panel for the Xfce desktop environment"
+pkgdesc="A mod version of panel for the Xfce desktop environment"
 arch=('i686' 'x86_64')
-url="http://www.xfce.org/"
+url="https://github.com/hwwwt/xfce4-panel-alpha"
 license=('GPL2')
 groups=('xfce4')
 depends=('exo' 'garcon' 'libxfce4ui' 'libwnck' 'hicolor-icon-theme'
@@ -48,5 +48,3 @@ package() {
   cd "$srcdir/$_pkgname-$pkgver"
   make DESTDIR="$pkgdir" install
 }
-
-# vim:set ts=2 sw=2 et:
