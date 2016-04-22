@@ -15,9 +15,9 @@ A mod version of xfce4-panel, just like **Android's immersive top bar**.
 介绍/Introduction  
 ----------------
   
-当前活动窗口最大化时顶栏变为**透明**。
+当前活动窗口最大化时面板变为**不透明**，其他情况下面板不透明度为设定值。
 
-When the active window become maximize, the panel will become **transparent**.
+When the active window become maximize, the panel will become **opaque**. In other cases, the alpha value of the panel is what you set.
 
 -----
 
