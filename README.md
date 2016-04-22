@@ -1,7 +1,7 @@
 xfce4-panel-alpha
 =================
 </br></br>
-一个修改版的xfce4-Panel，可以达到类似** Android 沉浸式任务栏**的效果。 
+一个修改版的xfce4-Panel，可以达到类似**Android 沉浸式任务栏**的效果。 
  
 A mod version of xfce4-panel, just like **Android's immersive top bar**.
 
